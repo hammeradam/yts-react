@@ -19,6 +19,7 @@ const Header = styled.header`
     align-items: center;
     justify-content: center;
     gap: 30px;
+    border-bottom: 1px solid ${({ theme }) => theme.primary};
 `;
 
 const NavLink = styled(NavLinkBase)`

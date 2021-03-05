@@ -21,17 +21,17 @@ export const Modal = styled.section<{ isOpen: boolean }>`
     background-position: center;
     background-size: cover;
     transition: background-image .3s ease;
-    z-index: 1;
+    z-index: 4;
     transition: .3s transform ease;
     min-height: 50%;
 
     @media (max-width: 991px) {
-        padding: 10px;
-        top: 20px;
+        padding: 20px;
+        top: 80px;
         left: 20px;
-        width: calc(100vw - 40px);
-        height: calc(100vh - 40px);
-        transform: none;
+        width: calc(100vw - 80px);
+        height: calc(100vh - 130px);
+        transform: ${({ isOpen }) => isOpen ? 'none' : 'translateY(200%)'};
     }
 `;
 
@@ -54,6 +54,7 @@ export const ModalClose = styled.div`
     top: 20px;
     right: 20px;
     cursor: pointer;
+    z-index: 10;
 
     i {
         transition: 0.2s ease;
@@ -70,6 +71,10 @@ export const TopRow = styled.div`
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+
+    @media (max-width: 991px) {
+        flex-direction: column;
+    }
 `
 
 export const InfoWrapper = styled.div`
@@ -77,7 +82,7 @@ export const InfoWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-
+    text-align: center;
 `;
 
 export const BadgeWrapper = styled.div`
@@ -99,6 +104,7 @@ const DownloadLinkWrapper = styled.div`
     display: flex;
     gap: 5px;
     margin-top: 10px;
+    flex-wrap: wrap;
 `
 
 const DownloadLink = styled.div`

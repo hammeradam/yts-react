@@ -2,11 +2,15 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
     color: ${({ theme }) => theme.textColor};
-    width: 20%;
+    width: 15%;
     overflow: hidden;
     position: relative;
 
     --ggs: 0.8;
+
+    @media (max-width: 1365px) {
+        width: 20%;
+    }
 
     @media (max-width: 1023px) {
         width: 30%;

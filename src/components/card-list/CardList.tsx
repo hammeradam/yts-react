@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Movie } from '../../providers/movie/types';
 import { Card } from '../card/Card';
-import { CardsWrapper } from './Styled';
+import { CardsWrapper, SearchContainer, Input } from './Styled';
 
 async function getMovieData(
     searchTerm = '',
@@ -53,7 +53,12 @@ export const CardList = () => {
     useEffect(() => {
         if (page !== 2) {
             getMovieData(searchTerm, 8, page).then((movies) =>
-                setMovies((prevstate) => [...prevstate, ...movies.data.movies])
+                setMovies((prevState) => {
+                    if (movies.data?.movies?.length) {
+                        return [...prevState, ...movies.data.movies]
+                    }
+                    return prevState;
+                })
             );
         }
     }, [page, searchTerm]);
@@ -63,14 +68,16 @@ export const CardList = () => {
     };
     return (
         <>
-            <input
-                type="text"
-                value={searchTerm}
-                onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    event.persist();
-                    setSearchTerm(event.target.value);
-                }}
-            />
+            <SearchContainer>
+                <Input
+                    type="text"
+                    value={searchTerm}
+                    onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        event.persist();
+                        setSearchTerm(event.target.value);
+                    }}
+                />
+            </SearchContainer>
             <CardsWrapper>
                 {movies.map((movie) => (
                     <Card key={movie.id} movie={movie} />
