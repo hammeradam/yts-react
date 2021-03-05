@@ -32,12 +32,15 @@ function App() {
     return (
         <BrowserRouter>
             <Header>
-                <NavLink to="/">Home</NavLink>
-                <NavLink to="/favorites">Favorites</NavLink>
+                <NavLink to="/yts-react">Home</NavLink>
+                <NavLink to="/yts-react/favorites">Favorites</NavLink>
             </Header>
             <Switch>
-                <Route path="/favorites">
+                <Route path="/yts-react/favorites">
                     <Favorites />
+                </Route>
+                <Route path="/yts-react">
+                    <CardList />
                 </Route>
                 <Route path="/">
                     <CardList />
