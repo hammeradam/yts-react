@@ -16,11 +16,13 @@ export const DetailModalProvider = ({
     const [movie, setMovie] = useState<Movie | null>(null);
 
     const openDetailModal = (movie: Movie) => {
+        document.title = `YTS React - ${movie.title}`;
         setMovie(movie);
         setIsDetailModalOpen(true);
     };
 
     const closeDetailModal = () => {
+        document.title = 'YTS React';
         setMovie(null);
         setIsDetailModalOpen(false);
     };
