@@ -82,6 +82,7 @@ export interface Torrent {
     quality: string;
     type: string;
     url: string;
+    hash: string;
 }
 
 export interface Movie {

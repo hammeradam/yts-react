@@ -18,6 +18,23 @@ interface CardProps {
     movie: Movie;
 }
 
+const trackers: string[] = [
+    'udp://open.demonii.com:1337/announce',
+    'udp://tracker.openbittorrent.com:80',
+    'udp://tracker.coppersurfer.tk:6969',
+    'udp://glotorrents.pw:6969/announce',
+    'udp://tracker.opentrackr.org:1337/announce',
+    'udp://torrent.gresille.org:80/announce',
+    'udp://p4p.arenabg.com:1337',
+    'udp://tracker.leechers-paradise.org:6969'
+];
+
+const getMagnetLink = (movie: Movie, torrent: Torrent) => {
+    return `magnet:?xt=urn:btih:${torrent.hash}&dn=${encodeURIComponent(
+        movie.title
+    )}&tr=${trackers.join('&')}`;
+};
+
 export const Card = ({ movie }: CardProps) => {
     const [isDownloadOpen, setIsDownloadOpen] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
@@ -25,8 +42,10 @@ export const Card = ({ movie }: CardProps) => {
     const { addToBookmarks, removeFromBookmarks, checkIsBookmarked } = useDB();
 
     useEffect(() => {
-        checkIsBookmarked?.(movie).then((found: boolean) => setIsBookmarked(found));
-    }, [movie, checkIsBookmarked])
+        checkIsBookmarked?.(movie).then((found: boolean) =>
+            setIsBookmarked(found)
+        );
+    }, [movie, checkIsBookmarked]);
 
     return (
         <CardWrapper>
@@ -36,9 +55,11 @@ export const Card = ({ movie }: CardProps) => {
             <CardDetails>
                 <CardTitle>{movie.title}</CardTitle>
                 <CardActionsWrapper>
-                    <i className="gg-info" onClick={() => {
-                        openDetailModal?.(movie);
-                    }}></i>
+                    <i
+                        className="gg-info"
+                        onClick={() => {
+                            openDetailModal?.(movie);
+                        }}></i>
                     <ActionDivider />
                     <i
                         className="gg-software-download"
@@ -52,7 +73,7 @@ export const Card = ({ movie }: CardProps) => {
                             if (isBookmarked) {
                                 await removeFromBookmarks?.(movie);
                             } else {
-                                await addToBookmarks?.(movie)
+                                await addToBookmarks?.(movie);
                             }
 
                             setIsBookmarked((prev) => !prev);
@@ -67,9 +88,12 @@ export const Card = ({ movie }: CardProps) => {
                 </LinkWrapperClose>
                 {movie.torrents.map((torrent: Torrent, index: number) => (
                     <CardLink key={`${movie.id}_torrent_${index}`}>
-                        <i className="gg-software-download"></i>
                         <a href={torrent.url}>
                             {`${torrent.type} ${torrent.quality}`}
+                            <i className="gg-software-download"></i>
+                        </a>
+                        <a href={getMagnetLink(movie, torrent)}>
+                            <i className="gg-magnet"></i>
                         </a>
                     </CardLink>
                 ))}

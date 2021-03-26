@@ -5,6 +5,9 @@ export const CardWrapper = styled.div`
     width: 15%;
     overflow: hidden;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     --ggs: 0.8;
 
@@ -27,6 +30,8 @@ export const CardWrapper = styled.div`
 
 export const ImageWrapper = styled.div`
     display: flex;
+    aspect-ratio: 2 / 3;
+    width: 100%;
 
     img {
         width: 100%;
@@ -35,6 +40,9 @@ export const ImageWrapper = styled.div`
 `;
 
 export const CardDetails = styled.div`
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
     border: 1px solid ${({ theme }) => theme.borderColor};
     border-top: none;
 `;
@@ -46,6 +54,7 @@ export const CardTitle = styled.div`
     align-items: center;
     justify-content: center;
     text-align: center;
+    flex-grow: 1;
 `;
 
 interface CardLinkWrapperProps {
@@ -80,11 +89,21 @@ export const CardLink = styled.div`
     gap: 5px;
     align-items: center;
 
-    &:hover {
-        a,
-        i {
+    a {
+        display: flex;
+        gap: 5px;
+        align-items: baseline;
+    
+        &:hover {
             color: ${({ theme }) => theme.primary};
+            i {
+                color: ${({ theme }) => theme.primary};
+            }
         }
+    }
+
+    i:hover {
+        color: ${({ theme }) => theme.primary};
     }
 `;
 
