@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import styled from 'styled-components'
 import { Movie } from '../../providers/movie/types';
 
@@ -142,8 +143,21 @@ export const RatingWrapper = styled.div`
 `
 
 export const DetailModal = ({ isOpen, movie, close }: ModalProps) => {
-    return (
+    useEffect(() => {
+        const onKeyDown = ({ key }: { key: string }) => {
+            if (key === 'Escape') {
+                close();
+            }
+        };
 
+        document.addEventListener('keydown', onKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', onKeyDown);
+        };
+    }, [close]);
+
+    return (
         <Modal isOpen={isOpen} style={{
             backgroundImage: `url(${movie?.background_image})`
         }}>
