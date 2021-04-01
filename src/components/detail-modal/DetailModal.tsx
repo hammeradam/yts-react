@@ -159,7 +159,7 @@ export const DetailModal = ({ isOpen, movie, close }: ModalProps) => {
 
     return (
         <Modal isOpen={isOpen} style={{
-            backgroundImage: `url(${movie?.background_image})`
+            backgroundImage: `url(${movie?.background_image.replace('yts', 'img.yts')})`
         }}>
             <BackgroundGradient />
             <ModalClose>
@@ -168,7 +168,7 @@ export const DetailModal = ({ isOpen, movie, close }: ModalProps) => {
             <ModalBody>
                     <TopRow>
                         <ImageWrapper>
-                            <img src={movie?.medium_cover_image}  alt="cover"/>
+                            <img src={movie?.medium_cover_image.replace('yts', 'img.yts')}  alt="cover"/>
                         </ImageWrapper>
                         <InfoWrapper>
                             <h3>{movie?.title}</h3> 

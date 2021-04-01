@@ -13,6 +13,7 @@ import {
 import { Movie, Torrent } from '../../providers/movie/types';
 import { useDetailModal } from '../../providers/detail-modal';
 import { useDB } from '../../providers/db';
+import { Placeholder } from '../placeholder/Placeholder';
 
 interface CardProps {
     movie: Movie;
@@ -38,6 +39,7 @@ const getMagnetLink = (movie: Movie, torrent: Torrent) => {
 export const Card = ({ movie }: CardProps) => {
     const [isDownloadOpen, setIsDownloadOpen] = useState(false);
     const [isBookmarked, setIsBookmarked] = useState(false);
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
     const { openDetailModal } = useDetailModal();
     const { addToBookmarks, removeFromBookmarks, checkIsBookmarked } = useDB();
 
@@ -50,7 +52,8 @@ export const Card = ({ movie }: CardProps) => {
     return (
         <CardWrapper>
             <ImageWrapper>
-                <img src={movie.medium_cover_image} alt="" />
+                <Placeholder hide={isImageLoaded} />
+                <img src={movie.medium_cover_image.replace('yts', 'img.yts')} alt="" onLoad={() => setIsImageLoaded(true)} />
             </ImageWrapper>
             <CardDetails>
                 <CardTitle>{movie.title}</CardTitle>
