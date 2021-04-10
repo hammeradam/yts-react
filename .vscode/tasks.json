@@ -6,7 +6,13 @@
             "script": "predeploy",
             "problemMatcher": [],
             "label": "npm: predeploy",
-            "detail": "npm run build",
+            "group": "build"
+        },
+        {
+            "type": "npm",
+            "script": "deploy",
+            "problemMatcher": [],
+            "label": "npm: deploy",
             "group": "build"
         }
     ]
