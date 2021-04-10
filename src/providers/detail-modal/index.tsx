@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react';
-import { DetailModal } from '../../components/detail-modal/DetailModal';
+import { Backdrop, DetailModal } from '../../components/detail-modal/DetailModal';
 import { Movie } from '../movie/types';
 
 type StateContext = {
@@ -30,6 +30,7 @@ export const DetailModalProvider = ({
     return (
         <DetailModalContext.Provider
             value={{ openDetailModal, closeDetailModal }}>
+            <Backdrop onClick={closeDetailModal} open={isDetailModalOpen} />
             <DetailModal
                 isOpen={isDetailModalOpen}
                 close={closeDetailModal}

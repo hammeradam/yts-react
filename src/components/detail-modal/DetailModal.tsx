@@ -142,6 +142,17 @@ export const RatingWrapper = styled.div`
     padding-left: 5px;
 `
 
+export const Backdrop = styled.div<{ open: boolean }>`
+    cursor: pointer;
+    position: fixed;
+    inset: 0;
+    background: black;
+    z-index: 2;
+    transition:  ease .5s opacity;
+    opacity: ${({ open }) => open ? 0.7 : 0};
+    pointer-events: ${({ open }) => open ? 'all' : 'none'};
+`
+
 export const DetailModal = ({ isOpen, movie, close }: ModalProps) => {
     useEffect(() => {
         const onKeyDown = ({ key }: { key: string }) => {
