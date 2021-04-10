@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
     color: ${({ theme }) => theme.textColor};
-    width: 15%;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -10,22 +9,6 @@ export const CardWrapper = styled.div`
     justify-content: space-between;
 
     --ggs: 0.8;
-
-    @media (max-width: 1365px) {
-        width: 20%;
-    }
-
-    @media (max-width: 1023px) {
-        width: 30%;
-    }
-
-    @media (max-width: 575px) {
-        width: 40%;
-    }
-
-    @media (max-width: 320px) {
-        width: 80%;
-    }
 `;
 
 export const ImageWrapper = styled.div`
